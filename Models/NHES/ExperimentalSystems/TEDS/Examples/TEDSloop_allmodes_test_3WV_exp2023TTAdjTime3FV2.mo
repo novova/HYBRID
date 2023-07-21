@@ -71,7 +71,7 @@ model TEDSloop_allmodes_test_3WV_exp2023TTAdjTime3FV2
     m_flow_start=0.84)
     annotation (Placement(transformation(extent={{220,120},{240,140}})));
   Data.Data_TEDS data(T_hot_side=523.15, T_cold_side=298.15)
-    annotation (Placement(transformation(extent={{-100,124},{-80,144}})));
+    annotation (Placement(transformation(extent={{-160,124},{-140,144}})));
 
   TRANSFORM.Fluid.Sensors.TemperatureTwoPort sensor_T(redeclare package Medium =
         TRANSFORM.Media.Fluids.Therminol_66.LinearTherminol66_A_250C, precision=
