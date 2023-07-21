@@ -4,7 +4,7 @@ model Thermocline_fluidprops_heaters_newHC_120C
   import TRANSFORM;
 
   replaceable package Medium =
-      TRANSFORM.Media.Fluids.DOWTHERM.LinearDOWTHERM_A_95C constrainedby
+      TRANSFORM.Media.Fluids.Therminol_66.LinearTherminol66_A_250C constrainedby
     TRANSFORM.Media.Interfaces.Fluids.PartialMedium "Fluid Medium" annotation (
       choicesAllMatching=true);
 
