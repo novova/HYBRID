@@ -725,8 +725,8 @@ equation
           {62,90},{74,90},{74,66},{79.2,66}}, color={0,0,127}));
   connect(V2.y[1], Valve2.opening) annotation (Line(points={{106.7,165},{112,
           165},{112,92},{132,92},{132,80.8}}, color={0,0,127}));
-  connect(V3.y[1], Valve3.opening) annotation (Line(points={{148.7,165},{156,
-          165},{156,78},{164,78},{164,66},{158.8,66}}, color={0,0,127}));
+  connect(V3.y[1], Valve3.opening) annotation (Line(points={{148.7,165},{166,
+          165},{166,66},{158.8,66}},                   color={0,0,127}));
   connect(sensor_m_flow1.port_a, pump.port_b)
     annotation (Line(points={{-24,-146},{-16,-146}}, color={0,127,255}));
   connect(Valve6.port_b, ValveFl.port_b)
