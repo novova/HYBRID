@@ -1,6 +1,7 @@
 within NHES.Systems;
 package HeatTransport
   model HeatTransport
+    "I did it in Excel and think it's sufficient :p"
     extends BaseClasses.Partial_SubSystem_A(
       redeclare replaceable ControlSystems.CS_Dummy CS,
       redeclare replaceable ControlSystems.ED_Dummy ED,
@@ -2976,8 +2977,8 @@ package HeatTransport
       annotation (Placement(transformation(extent={{-60,-20},{-20,20}})));
 
     BalanceOfPlant.StagebyStageTurbineSecondary.Control_and_Distribution.LossResistance
-                                           resistance(redeclare package Medium
-        = Medium, K=K*0.5*(((Modelica.Constants.pi*D^2)/4)^2))
+                                           resistance(redeclare package Medium =
+          Medium, K=K*0.5*(((Modelica.Constants.pi*D^2)/4)^2))
       annotation (Placement(transformation(extent={{-12,-10},{8,10}})));
     TRANSFORM.Fluid.Pipes.GenericPipe_MultiTransferSurface pipe1(
       redeclare package Medium = Medium,
@@ -2999,11 +3000,11 @@ package HeatTransport
       annotation (choicesAllMatching=true);
     replaceable package Medium = Modelica.Media.Water.StandardWater annotation (
         choicesAllMatching=true);
-    TRANSFORM.Fluid.Interfaces.FluidPort_Flow port_a(redeclare package Medium
-        = Medium)
+    TRANSFORM.Fluid.Interfaces.FluidPort_Flow port_a(redeclare package Medium =
+          Medium)
       annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
-    TRANSFORM.Fluid.Interfaces.FluidPort_State port_b(redeclare package Medium
-        = Medium)
+    TRANSFORM.Fluid.Interfaces.FluidPort_State port_b(redeclare package Medium =
+          Medium)
       annotation (Placement(transformation(extent={{90,-10},{110,10}})));
   equation
 
