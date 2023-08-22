@@ -241,8 +241,8 @@ model TEDSloop_allmodes_test_3WV_exp2023TTAdjTime3FV2_v2
 
   TRANSFORM.HeatExchangers.GenericDistributed_HX Glycol_HX(
     p_b_start_shell=system.p_ambient,
-    T_a_start_shell=data.T_hot_side,
-    T_b_start_shell=data.T_cold_side,
+    T_a_start_shell=299.15,
+    T_b_start_shell=298.15,
     p_b_start_tube=boundary1.p,
     counterCurrent=true,
     m_flow_a_start_tube=Chiller_Mass_Flow.m_flow,
@@ -524,7 +524,8 @@ model TEDSloop_allmodes_test_3WV_exp2023TTAdjTime3FV2_v2
     diameter=0.051,
     redeclare model FlowModel =
         Modelica.Fluid.Pipes.BaseClasses.FlowModels.NominalLaminarFlow (
-          dp_nominal=600, m_flow_nominal=0.689))
+          dp_nominal=600, m_flow_nominal=0.689),
+    T_start=298.15)
     annotation (Placement(transformation(extent={{16,-130},{32,-114}})));
   Modelica.Fluid.Pipes.DynamicPipe pipe5(
     redeclare package Medium =
@@ -533,8 +534,9 @@ model TEDSloop_allmodes_test_3WV_exp2023TTAdjTime3FV2_v2
     diameter=0.051,
     redeclare model FlowModel =
         Modelica.Fluid.Pipes.BaseClasses.FlowModels.NominalLaminarFlow (
-          dp_nominal=600, m_flow_nominal=0.689))
-    annotation (Placement(transformation(extent={{90,48},{106,64}})));
+          dp_nominal=600, m_flow_nominal=0.689),
+    T_start=298.15)
+    annotation (Placement(transformation(extent={{114,42},{98,58}})));
   Modelica.Fluid.Pipes.DynamicPipe pipe6(
     redeclare package Medium =
         TRANSFORM.Media.Fluids.Therminol_66.LinearTherminol66_A_250C,
@@ -542,7 +544,8 @@ model TEDSloop_allmodes_test_3WV_exp2023TTAdjTime3FV2_v2
     diameter=0.051,
     redeclare model FlowModel =
         Modelica.Fluid.Pipes.BaseClasses.FlowModels.NominalLaminarFlow (
-          dp_nominal=600, m_flow_nominal=0.689))
+          dp_nominal=600, m_flow_nominal=0.689),
+    T_start=298.15)
     annotation (Placement(transformation(extent={{-6,-6},{6,6}},
         rotation=90,
         origin={80,-86})));
@@ -562,7 +565,8 @@ model TEDSloop_allmodes_test_3WV_exp2023TTAdjTime3FV2_v2
     diameter=0.051,
     redeclare model FlowModel =
         Modelica.Fluid.Pipes.BaseClasses.FlowModels.NominalLaminarFlow (
-          dp_nominal=600, m_flow_nominal=0.689))
+          dp_nominal=600, m_flow_nominal=0.689),
+    T_start=298.15)
     annotation (Placement(transformation(extent={{-8,-8},{8,8}},
         rotation=270,
         origin={140,24})));
@@ -573,7 +577,8 @@ model TEDSloop_allmodes_test_3WV_exp2023TTAdjTime3FV2_v2
     diameter=0.051,
     redeclare model FlowModel =
         Modelica.Fluid.Pipes.BaseClasses.FlowModels.NominalLaminarFlow (
-          dp_nominal=600, m_flow_nominal=0.689))
+          dp_nominal=600, m_flow_nominal=0.689),
+    T_start=298.15)
     annotation (Placement(transformation(extent={{-6,-6},{6,6}},
         rotation=90,
         origin={134,-82})));
@@ -812,10 +817,6 @@ equation
           -142},{102,-142},{102,-144},{98,-144}}, color={0,127,255}));
   connect(p1.port_a, nonLinear_Break1.port_b) annotation (Line(points={{16,-122},
           {-2,-122},{-2,-126},{-10,-126}}, color={0,127,255}));
-  connect(pipe5.port_a,PV_049. port_b)
-    annotation (Line(points={{90,56},{84,56},{84,60}}, color={0,127,255}));
-  connect(pipe5.port_b, m_thot.port_a) annotation (Line(points={{106,56},{112,
-          56},{112,44},{84,44},{84,42}}, color={0,127,255}));
   connect(p1.port_b, FM_201.port_a)
     annotation (Line(points={{32,-122},{40,-122}}, color={0,127,255}));
   connect(FM_201.port_b, PV_051.port_b)
@@ -834,8 +835,6 @@ equation
           -150},{56,-150},{56,-144},{86,-144}}, color={0,127,255}));
   connect(T_discharge_outlet.port_a, pipe1.port_b) annotation (Line(points={{
           154,-3},{154,-10},{140,-10},{140,16}}, color={0,127,255}));
-  connect(pipe1.port_a, pipe5.port_b)
-    annotation (Line(points={{140,32},{140,56},{106,56}}, color={0,127,255}));
   connect(PV_052.port_b, FM_002.port_a) annotation (Line(points={{154,-134},{
           154,-170},{123,-170},{123,-173}}, color={0,127,255}));
   connect(pipe8.port_b, T_ch_o.port_b) annotation (Line(points={{134,-76},{134,
@@ -846,9 +845,15 @@ equation
           -160},{128,-160},{128,-164}}, color={0,127,255}));
   connect(p2.port_b, FM_002.port_a) annotation (Line(points={{144,-164},{154,
           -164},{154,-170},{123,-170},{123,-173}}, color={0,127,255}));
+  connect(PV_049.port_b, pipe5.port_a) annotation (Line(points={{84,60},{122,60},
+          {122,50},{114,50}}, color={0,127,255}));
+  connect(PV_049.port_b, pipe1.port_a) annotation (Line(points={{84,60},{122,60},
+          {122,32},{140,32}}, color={0,127,255}));
+  connect(pipe5.port_b, m_thot.port_a)
+    annotation (Line(points={{98,50},{84,50},{84,42}}, color={0,127,255}));
   annotation (
-    Icon(coordinateSystem(preserveAspectRatio=false, extent={{-160,-220},{240,
-            140}}), graphics={
+    Icon(coordinateSystem(preserveAspectRatio=false, extent={{-200,-260},{280,
+            200}}), graphics={
         Ellipse(lineColor = {75,138,73},
                 fillColor={255,255,255},
                 fillPattern = FillPattern.Solid,
@@ -858,8 +863,8 @@ equation
                 pattern = LinePattern.None,
                 fillPattern = FillPattern.Solid,
                 points={{-24,68},{176,-30},{-24,-150},{-24,68}})}),
-    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-160,-220},{
-            240,140}})),
+    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-200,-260},{
+            280,200}})),
     experiment(
       StopTime=16000,
       Interval=10,
