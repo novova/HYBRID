@@ -433,7 +433,7 @@ model TEDSloop_allmodes_test_3WV_exp2023TTAdjTime3FV2_v2
         9180,0; 9280,0; 10980,0; 11080,1; 14640,1; 14740,0; 15740,0],
                                                                startTime=0)
     annotation (Placement(transformation(extent={{134,158},{148,172}})));
-  TRANSFORM.Fluid.Sensors.MassFlowRate sensor_m_flow1(redeclare package Medium =
+  TRANSFORM.Fluid.Sensors.MassFlowRate FM_001(redeclare package Medium =
         TRANSFORM.Media.Fluids.Therminol_66.LinearTherminol66_A_250C, precision
       =3) annotation (Placement(transformation(extent={{-24,-154},{-42,-138}})));
   TRANSFORM.Fluid.Valves.ValveLinear ValveFl(
@@ -467,14 +467,13 @@ model TEDSloop_allmodes_test_3WV_exp2023TTAdjTime3FV2_v2
         rotation=0,
         origin={-16,-126})));
   Modelica.Blocks.Sources.RealExpression Heater_BOP_Demand2(y=1/
-        sensor_m_flow1.Medium.density_ph(sensor_m_flow1.port_b.p,
-        sensor_m_flow1.port_b.h_outflow))
+        sensor_m_flow1.Medium.density_ph(FM_001.port_b.p, FM_001.port_b.h_outflow))
     annotation (Placement(transformation(extent={{-194,-122},{-172,-100}})));
   Modelica.Blocks.Sources.RealExpression GPMconversion(y=15850.323140625002)
     annotation (Placement(transformation(extent={{-194,-100},{-172,-78}})));
   Modelica.Blocks.Math.Product product1
     annotation (Placement(transformation(extent={{-154,-116},{-144,-106}})));
-  Modelica.Blocks.Math.Product FM_001
+  Modelica.Blocks.Math.Product FM_001_gpm
     annotation (Placement(transformation(extent={{-126,-98},{-116,-88}})));
   Modelica.Blocks.Sources.CombiTimeTable THXout(table=[0,400; 2220,400; 2400,
         400; 9180,400; 9280,138; 10980,138; 11080,138; 14640,138; 14740,138;
@@ -591,6 +590,11 @@ model TEDSloop_allmodes_test_3WV_exp2023TTAdjTime3FV2_v2
         Modelica.Fluid.Pipes.BaseClasses.FlowModels.NominalLaminarFlow (
           dp_nominal=600, m_flow_nominal=0.689))
     annotation (Placement(transformation(extent={{128,-172},{144,-156}})));
+  Modelica.Blocks.Math.Product FM_1
+    annotation (Placement(transformation(extent={{-46,-54},{-36,-44}})));
+  Modelica.Blocks.Sources.RealExpression GPMconversion1(y=1/15850.323140625002*
+        1000*60)
+    annotation (Placement(transformation(extent={{-74,-40},{-52,-18}})));
 equation
   connect(pipe4.port_b, TC_002.port_a)
     annotation (Line(points={{-95,-38},{-95,45},{-80,45}}, color={0,127,255}));
@@ -759,11 +763,11 @@ equation
           165},{112,92},{132,92},{132,80.8}}, color={0,0,127}));
   connect(V3.y[1],PV_050. opening) annotation (Line(points={{148.7,165},{166,
           165},{166,66},{158.8,66}},                   color={0,0,127}));
-  connect(sensor_m_flow1.port_a, P_001.port_b)
+  connect(FM_001.port_a, P_001.port_b)
     annotation (Line(points={{-24,-146},{-16,-146}}, color={0,127,255}));
   connect(PV_004.port_b, ValveFl.port_b)
     annotation (Line(points={{-84,-146},{-60,-146}}, color={0,127,255}));
-  connect(ValveFl.port_a, sensor_m_flow1.port_b)
+  connect(ValveFl.port_a, FM_001.port_b)
     annotation (Line(points={{-48,-146},{-42,-146}}, color={0,127,255}));
   connect(Flow.y[1], VolFlow_Control2.u_s) annotation (Line(points={{-61.3,-73},
           {-61.3,-74},{-43.2,-74}},                     color={0,0,127}));
@@ -772,15 +776,15 @@ equation
         color={0,0,127}));
   connect(nonLinear_Break1.port_a,PV_004. port_b) annotation (Line(points={{-22,
           -126},{-74,-126},{-74,-146},{-84,-146}}, color={0,127,255}));
-  connect(sensor_m_flow1.m_flow, product1.u2) annotation (Line(points={{-33,
-          -143.12},{-34,-143.12},{-34,-114},{-140,-114},{-140,-120},{-160,-120},
-          {-160,-114},{-155,-114}}, color={0,0,127}));
+  connect(FM_001.m_flow, product1.u2) annotation (Line(points={{-33,-143.12},{-34,
+          -143.12},{-34,-114},{-140,-114},{-140,-120},{-160,-120},{-160,-114},{
+          -155,-114}}, color={0,0,127}));
   connect(Heater_BOP_Demand2.y, product1.u1) annotation (Line(points={{-170.9,
           -111},{-170.9,-112},{-162,-112},{-162,-108},{-155,-108}},
                        color={0,0,127}));
-  connect(GPMconversion.y, FM_001.u1) annotation (Line(points={{-170.9,-89},{-170.9,
-          -90},{-127,-90}}, color={0,0,127}));
-  connect(product1.y, FM_001.u2) annotation (Line(points={{-143.5,-111},{-143.5,
+  connect(GPMconversion.y, FM_001_gpm.u1) annotation (Line(points={{-170.9,-89},
+          {-170.9,-90},{-127,-90}}, color={0,0,127}));
+  connect(product1.y, FM_001_gpm.u2) annotation (Line(points={{-143.5,-111},{-143.5,
           -112},{-132,-112},{-132,-96},{-127,-96}}, color={0,0,127}));
   connect(THXout.y[1], add.u1) annotation (Line(points={{-97.3,-195},{-97.3,
           -202},{-86,-202}},                       color={0,0,127}));
@@ -789,8 +793,8 @@ equation
   connect(add.y, MassFlow_Control1.u_s) annotation (Line(points={{-63,-208},{
           -35.2,-208}},                                             color={0,0,
           127}));
-  connect(FM_001.y, VolFlow_Control2.u_m) annotation (Line(points={{-115.5,-93},
-          {-115.5,-94},{-36,-94},{-36,-81.2}}, color={0,0,127}));
+  connect(FM_001_gpm.y, VolFlow_Control2.u_m) annotation (Line(points={{-115.5,
+          -93},{-115.5,-94},{-36,-94},{-36,-81.2}}, color={0,0,127}));
   connect(firstOrder5.y,PV_051. opening) annotation (Line(points={{99.4,-116},{
           84.8,-116}},                    color={0,0,127}));
   connect(V3.y[1], firstOrder5.u) annotation (Line(points={{148.7,165},{252,165},
@@ -851,8 +855,12 @@ equation
           {122,32},{140,32}}, color={0,127,255}));
   connect(pipe5.port_b, m_thot.port_a)
     annotation (Line(points={{98,50},{84,50},{84,42}}, color={0,127,255}));
+  connect(Flow.y[1], FM_1.u2) annotation (Line(points={{-61.3,-73},{-61.3,-74},
+          {-52,-74},{-52,-52},{-47,-52}}, color={0,0,127}));
+  connect(GPMconversion1.y, FM_1.u1) annotation (Line(points={{-50.9,-29},{
+          -50.9,-42},{-50,-42},{-50,-46},{-47,-46}}, color={0,0,127}));
   annotation (
-    Icon(coordinateSystem(preserveAspectRatio=false, extent={{-200,-260},{280,
+    Icon(coordinateSystem(preserveAspectRatio=false, extent={{-200,-280},{280,
             200}}), graphics={
         Ellipse(lineColor = {75,138,73},
                 fillColor={255,255,255},
@@ -863,7 +871,7 @@ equation
                 pattern = LinePattern.None,
                 fillPattern = FillPattern.Solid,
                 points={{-24,68},{176,-30},{-24,-150},{-24,68}})}),
-    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-200,-260},{
+    Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-200,-280},{
             280,200}})),
     experiment(
       StopTime=16000,
