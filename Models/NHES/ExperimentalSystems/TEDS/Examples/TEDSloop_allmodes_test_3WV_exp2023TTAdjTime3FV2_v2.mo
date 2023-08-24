@@ -22,7 +22,7 @@ model TEDSloop_allmodes_test_3WV_exp2023TTAdjTime3FV2_v2
   Modelica.Fluid.Pipes.DynamicPipe pipe2(
     redeclare package Medium =
         TRANSFORM.Media.Fluids.Therminol_66.LinearTherminol66_A_250C,
-    length=1,
+    length=4,
     diameter=0.051,
     redeclare model FlowModel =
         Modelica.Fluid.Pipes.BaseClasses.FlowModels.NominalLaminarFlow (
@@ -31,7 +31,7 @@ model TEDSloop_allmodes_test_3WV_exp2023TTAdjTime3FV2_v2
   Modelica.Fluid.Pipes.DynamicPipe pipe4(
     redeclare package Medium =
         TRANSFORM.Media.Fluids.Therminol_66.LinearTherminol66_A_250C,
-    length=1,
+    length=7,
     diameter=0.051,
     redeclare model FlowModel =
         Modelica.Fluid.Pipes.BaseClasses.FlowModels.NominalLaminarFlow (
@@ -44,7 +44,7 @@ model TEDSloop_allmodes_test_3WV_exp2023TTAdjTime3FV2_v2
     redeclare package Medium =
         TRANSFORM.Media.Fluids.Therminol_66.LinearTherminol66_A_250C,
     allowFlowReversal=true,
-    length=0.1,
+    length=15,
     diameter=0.051,
     redeclare model FlowModel =
         Modelica.Fluid.Pipes.BaseClasses.FlowModels.NominalLaminarFlow (
@@ -57,7 +57,7 @@ model TEDSloop_allmodes_test_3WV_exp2023TTAdjTime3FV2_v2
     redeclare package Medium =
         TRANSFORM.Media.Fluids.Therminol_66.LinearTherminol66_A_250C,
     A=1,
-    V0=0.1,
+    V0=0.3,
     p_surface=system.p_ambient,
     p_start=system.p_start,
     level_start=0,
@@ -81,11 +81,11 @@ model TEDSloop_allmodes_test_3WV_exp2023TTAdjTime3FV2_v2
   Modelica.Fluid.Pipes.DynamicPipe pipe3(
     redeclare package Medium =
         TRANSFORM.Media.Fluids.Therminol_66.LinearTherminol66_A_250C,
-    length=1,
+    length=10,
     diameter=0.051,
     redeclare model FlowModel =
         Modelica.Fluid.Pipes.BaseClasses.FlowModels.NominalLaminarFlow (
-          dp_nominal=600, m_flow_nominal=0.84))
+          dp_nominal=9000, m_flow_nominal=0.84))
                     annotation (Placement(transformation(
         extent={{6,6},{-6,-6}},
         rotation=0,
@@ -96,8 +96,8 @@ model TEDSloop_allmodes_test_3WV_exp2023TTAdjTime3FV2_v2
         extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={84,32})));
-  TRANSFORM.Fluid.Sensors.MassFlowRate sensor_m_flow2(redeclare package Medium =
-        TRANSFORM.Media.Fluids.Therminol_66.LinearTherminol66_A_250C, precision=
+  TRANSFORM.Fluid.Sensors.MassFlowRate sensor_m_flow2(redeclare package Medium
+      = TRANSFORM.Media.Fluids.Therminol_66.LinearTherminol66_A_250C, precision=
        3) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=-90,
@@ -203,8 +203,8 @@ model TEDSloop_allmodes_test_3WV_exp2023TTAdjTime3FV2_v2
     annotation (Placement(transformation(extent={{-42,94},{-20,118}})));
   BaseClasses.SignalSubBus_SensorOutput sensorSubBus
     annotation (Placement(transformation(extent={{-10,94},{12,118}})));
-  TRANSFORM.Fluid.Sensors.MassFlowRate sensor_m_flow3(redeclare package Medium =
-        TRANSFORM.Media.Fluids.Therminol_66.LinearTherminol66_A_250C, precision=
+  TRANSFORM.Fluid.Sensors.MassFlowRate sensor_m_flow3(redeclare package Medium
+      = TRANSFORM.Media.Fluids.Therminol_66.LinearTherminol66_A_250C, precision=
        3) annotation (Placement(transformation(
         extent={{10,-10},{-10,10}},
         rotation=-90,
@@ -334,8 +334,8 @@ model TEDSloop_allmodes_test_3WV_exp2023TTAdjTime3FV2_v2
         extent={{-12,-13},{12,13}},
         rotation=90,
         origin={80,-63})));
-  TRANSFORM.Fluid.Sensors.MassFlowRate BOP_Mass_flow(redeclare package Medium =
-        TRANSFORM.Media.Fluids.Therminol_66.LinearTherminol66_A_250C, precision=
+  TRANSFORM.Fluid.Sensors.MassFlowRate BOP_Mass_flow(redeclare package Medium
+      = TRANSFORM.Media.Fluids.Therminol_66.LinearTherminol66_A_250C, precision=
        3) annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
@@ -360,8 +360,8 @@ model TEDSloop_allmodes_test_3WV_exp2023TTAdjTime3FV2_v2
         extent={{-13,13},{13,-13}},
         rotation=270,
         origin={227,-65})));
-  TRANSFORM.Fluid.Sensors.TemperatureTwoPort TC_003a(redeclare package Medium =
-        TRANSFORM.Media.Fluids.Therminol_66.LinearTherminol66_A_250C, precision
+  TRANSFORM.Fluid.Sensors.TemperatureTwoPort TC_003a(redeclare package Medium
+      = TRANSFORM.Media.Fluids.Therminol_66.LinearTherminol66_A_250C, precision
       =3) annotation (Placement(transformation(extent={{18,64},{42,88}})));
   TRANSFORM.Fluid.Machines.Pump_PressureBooster P_001(
     redeclare package Medium =
@@ -370,7 +370,7 @@ model TEDSloop_allmodes_test_3WV_exp2023TTAdjTime3FV2_v2
     p_nominal=system.p_ambient + 1e4)
     annotation (Placement(transformation(extent={{0,-138},{-16,-154}})));
   Modelica.Blocks.Sources.RealExpression Heater_BOP_Demand(y=P_001.port_a.p +
-        2.0e4)
+        12.0e4)
     annotation (Placement(transformation(extent={{-54,-180},{-32,-158}})));
   Modelica.Blocks.Sources.Constant const2(k=12.6)
     annotation (Placement(transformation(
@@ -399,8 +399,8 @@ model TEDSloop_allmodes_test_3WV_exp2023TTAdjTime3FV2_v2
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
     k=-0.0004,
     Ti=5,
-    yMax=0.999,
-    yMin=0.001,
+    yMax=0.9997,
+    yMin=0.0003,
     initType=Modelica.Blocks.Types.Init.InitialOutput,
     y_start=0.5)
     annotation (Placement(transformation(extent={{-34,-202},{-22,-214}})));
@@ -422,8 +422,8 @@ model TEDSloop_allmodes_test_3WV_exp2023TTAdjTime3FV2_v2
         rotation=0,
         origin={16,-146})));
   Modelica.Blocks.Sources.CombiTimeTable V1(table=[0,0; 2220,0; 2400,1; 9180,1;
-        9280,0.0001; 10980,0.0001; 11080,0.0001; 14640,0.0001; 14740,0.0001;
-        15740,0.0001],                                         startTime=0)
+        9280,0.00005; 10980,0.00005; 11080,0.00005; 14640,0.00005; 14740,
+        0.00005; 15740,0.00005],                               startTime=0)
     annotation (Placement(transformation(extent={{42,158},{56,172}})));
   Modelica.Blocks.Sources.CombiTimeTable V2(table=[0,1; 2220,1; 2400,FV_opening;
         9180,FV_opening; 9280,1; 10980,1; 11080,FV_opening; 14640,FV_opening; 14740,
@@ -454,7 +454,7 @@ model TEDSloop_allmodes_test_3WV_exp2023TTAdjTime3FV2_v2
     annotation (Placement(transformation(extent={{-76,-80},{-62,-66}})));
   TRANSFORM.Controls.LimPID VolFlow_Control2(
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
-    k=0.04,
+    k=0.08,
     Ti=50,
     yMax=0.99,
     yMin=0.01,
@@ -467,7 +467,7 @@ model TEDSloop_allmodes_test_3WV_exp2023TTAdjTime3FV2_v2
         rotation=0,
         origin={-16,-126})));
   Modelica.Blocks.Sources.RealExpression Heater_BOP_Demand2(y=1/
-        sensor_m_flow1.Medium.density_ph(FM_001.port_b.p, FM_001.port_b.h_outflow))
+        FM_001.Medium.density_ph(FM_001.port_b.p, FM_001.port_b.h_outflow))
     annotation (Placement(transformation(extent={{-194,-122},{-172,-100}})));
   Modelica.Blocks.Sources.RealExpression GPMconversion(y=15850.323140625002)
     annotation (Placement(transformation(extent={{-194,-100},{-172,-78}})));
@@ -497,7 +497,7 @@ model TEDSloop_allmodes_test_3WV_exp2023TTAdjTime3FV2_v2
         rotation=0,
         origin={-190,78})));
   Modelica.Blocks.Sources.CombiTimeTable THeater(table=[0,300; 3000,300; 3060,
-        250; 10980,250; 11080,0; 12000,0.0],
+        255; 10980,255; 11080,0; 12000,0.0],
                                   startTime=0)
     annotation (Placement(transformation(extent={{-190,96},{-176,110}})));
   Modelica.Blocks.Math.Add add1
@@ -519,7 +519,7 @@ model TEDSloop_allmodes_test_3WV_exp2023TTAdjTime3FV2_v2
   Modelica.Fluid.Pipes.DynamicPipe p1(
     redeclare package Medium =
         TRANSFORM.Media.Fluids.Therminol_66.LinearTherminol66_A_250C,
-    length=10,
+    length=3,
     diameter=0.051,
     redeclare model FlowModel =
         Modelica.Fluid.Pipes.BaseClasses.FlowModels.NominalLaminarFlow (
@@ -529,7 +529,7 @@ model TEDSloop_allmodes_test_3WV_exp2023TTAdjTime3FV2_v2
   Modelica.Fluid.Pipes.DynamicPipe pipe5(
     redeclare package Medium =
         TRANSFORM.Media.Fluids.Therminol_66.LinearTherminol66_A_250C,
-    length=2,
+    length=3,
     diameter=0.051,
     redeclare model FlowModel =
         Modelica.Fluid.Pipes.BaseClasses.FlowModels.NominalLaminarFlow (
@@ -539,7 +539,7 @@ model TEDSloop_allmodes_test_3WV_exp2023TTAdjTime3FV2_v2
   Modelica.Fluid.Pipes.DynamicPipe pipe6(
     redeclare package Medium =
         TRANSFORM.Media.Fluids.Therminol_66.LinearTherminol66_A_250C,
-    length=10,
+    length=4,
     diameter=0.051,
     redeclare model FlowModel =
         Modelica.Fluid.Pipes.BaseClasses.FlowModels.NominalLaminarFlow (
@@ -560,7 +560,7 @@ model TEDSloop_allmodes_test_3WV_exp2023TTAdjTime3FV2_v2
   Modelica.Fluid.Pipes.DynamicPipe pipe1(
     redeclare package Medium =
         TRANSFORM.Media.Fluids.Therminol_66.LinearTherminol66_A_250C,
-    length=4,
+    length=2,
     diameter=0.051,
     redeclare model FlowModel =
         Modelica.Fluid.Pipes.BaseClasses.FlowModels.NominalLaminarFlow (
@@ -572,7 +572,7 @@ model TEDSloop_allmodes_test_3WV_exp2023TTAdjTime3FV2_v2
   Modelica.Fluid.Pipes.DynamicPipe pipe8(
     redeclare package Medium =
         TRANSFORM.Media.Fluids.Therminol_66.LinearTherminol66_A_250C,
-    length=2,
+    length=1,
     diameter=0.051,
     redeclare model FlowModel =
         Modelica.Fluid.Pipes.BaseClasses.FlowModels.NominalLaminarFlow (
@@ -584,17 +584,26 @@ model TEDSloop_allmodes_test_3WV_exp2023TTAdjTime3FV2_v2
   Modelica.Fluid.Pipes.DynamicPipe p2(
     redeclare package Medium =
         TRANSFORM.Media.Fluids.Therminol_66.LinearTherminol66_A_250C,
-    length=6,
+    length=0.5,
     diameter=0.051,
     redeclare model FlowModel =
         Modelica.Fluid.Pipes.BaseClasses.FlowModels.NominalLaminarFlow (
           dp_nominal=600, m_flow_nominal=0.689))
-    annotation (Placement(transformation(extent={{128,-172},{144,-156}})));
+    annotation (Placement(transformation(extent={{130,-168},{146,-152}})));
   Modelica.Blocks.Math.Product FM_1
     annotation (Placement(transformation(extent={{-46,-54},{-36,-44}})));
-  Modelica.Blocks.Sources.RealExpression GPMconversion1(y=1/15850.323140625002*
+  Modelica.Blocks.Sources.RealExpression Conversion_lpm(y=1/15850.323140625002*
         1000*60)
     annotation (Placement(transformation(extent={{-74,-40},{-52,-18}})));
+  Modelica.Fluid.Pipes.DynamicPipe p3(
+    redeclare package Medium =
+        TRANSFORM.Media.Fluids.Therminol_66.LinearTherminol66_A_250C,
+    length=4,
+    diameter=0.051,
+    redeclare model FlowModel =
+        Modelica.Fluid.Pipes.BaseClasses.FlowModels.NominalLaminarFlow (
+          dp_nominal=600, m_flow_nominal=0.689))
+    annotation (Placement(transformation(extent={{144,-178},{128,-162}})));
 equation
   connect(pipe4.port_b, TC_002.port_a)
     annotation (Line(points={{-95,-38},{-95,45},{-80,45}}, color={0,127,255}));
@@ -839,16 +848,12 @@ equation
           -150},{56,-150},{56,-144},{86,-144}}, color={0,127,255}));
   connect(T_discharge_outlet.port_a, pipe1.port_b) annotation (Line(points={{
           154,-3},{154,-10},{140,-10},{140,16}}, color={0,127,255}));
-  connect(PV_052.port_b, FM_002.port_a) annotation (Line(points={{154,-134},{
-          154,-170},{123,-170},{123,-173}}, color={0,127,255}));
   connect(pipe8.port_b, T_ch_o.port_b) annotation (Line(points={{134,-76},{134,
           -51},{154,-51}}, color={0,127,255}));
   connect(pipe8.port_a, PV_051.port_a) annotation (Line(points={{134,-88},{134,
           -96},{80,-96},{80,-110}}, color={0,127,255}));
   connect(PV_008.port_b, p2.port_a) annotation (Line(points={{124,-156},{124,
-          -160},{128,-160},{128,-164}}, color={0,127,255}));
-  connect(p2.port_b, FM_002.port_a) annotation (Line(points={{144,-164},{154,
-          -164},{154,-170},{123,-170},{123,-173}}, color={0,127,255}));
+          -160},{130,-160}},            color={0,127,255}));
   connect(PV_049.port_b, pipe5.port_a) annotation (Line(points={{84,60},{122,60},
           {122,50},{114,50}}, color={0,127,255}));
   connect(PV_049.port_b, pipe1.port_a) annotation (Line(points={{84,60},{122,60},
@@ -857,8 +862,14 @@ equation
     annotation (Line(points={{98,50},{84,50},{84,42}}, color={0,127,255}));
   connect(Flow.y[1], FM_1.u2) annotation (Line(points={{-61.3,-73},{-61.3,-74},
           {-52,-74},{-52,-52},{-47,-52}}, color={0,0,127}));
-  connect(GPMconversion1.y, FM_1.u1) annotation (Line(points={{-50.9,-29},{
+  connect(Conversion_lpm.y, FM_1.u1) annotation (Line(points={{-50.9,-29},{
           -50.9,-42},{-50,-42},{-50,-46},{-47,-46}}, color={0,0,127}));
+  connect(FM_002.port_a, p3.port_b) annotation (Line(points={{123,-173},{124,
+          -173},{124,-170},{128,-170}}, color={0,127,255}));
+  connect(PV_052.port_b, p2.port_b) annotation (Line(points={{154,-134},{154,
+          -160},{146,-160}}, color={0,127,255}));
+  connect(p2.port_b, p3.port_a) annotation (Line(points={{146,-160},{154,-160},
+          {154,-170},{144,-170}}, color={0,127,255}));
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-200,-280},{280,
             200}}), graphics={
