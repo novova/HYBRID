@@ -85,7 +85,7 @@ model TEDSloop_allmodes_test_3WV_exp2023TTAdjTime3FV2_v2
     diameter=0.051,
     redeclare model FlowModel =
         Modelica.Fluid.Pipes.BaseClasses.FlowModels.NominalLaminarFlow (
-          dp_nominal=9000, m_flow_nominal=0.84))
+          dp_nominal=8000, m_flow_nominal=0.84))
                     annotation (Placement(transformation(
         extent={{6,6},{-6,-6}},
         rotation=0,
@@ -497,7 +497,7 @@ model TEDSloop_allmodes_test_3WV_exp2023TTAdjTime3FV2_v2
         rotation=0,
         origin={-190,78})));
   Modelica.Blocks.Sources.CombiTimeTable THeater(table=[0,300; 3000,300; 3060,
-        255; 10980,255; 11080,0; 12000,0.0],
+        255; 10980,260; 11080,0; 12000,0.0],
                                   startTime=0)
     annotation (Placement(transformation(extent={{-190,96},{-176,110}})));
   Modelica.Blocks.Math.Add add1
