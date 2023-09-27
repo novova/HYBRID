@@ -27,7 +27,7 @@ parameter SI.Temperature T_hot_design = 300;
   Modelica.Blocks.Sources.CombiTimeTable T_GHXout(table=[0,400; 2220,400; 2400,400;
         9180,400; 9280,138; 10980,138; 11080,138; 14640,138; 14740,138; 15740,138],
       startTime=0)
-    annotation (Placement(transformation(extent={{-442,-2},{-420,20}})));
+    annotation (Placement(transformation(extent={{-436,-2},{-414,20}})));
   Modelica.Blocks.Math.Add add
     annotation (Placement(transformation(extent={{-210,-8},{-190,12}})));
   Modelica.Blocks.Sources.Constant const3(k=273.15)      annotation (Placement(
@@ -122,8 +122,9 @@ equation
       index=-1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(T_GHXout.y[1], add.u1) annotation (Line(points={{-418.9,9},{-220,9},{-220,
-          8},{-212,8}}, color={0,0,127}));
+  connect(T_GHXout.y[1], add.u1) annotation (Line(points={{-412.9,9},{-220,9},{
+          -220,8},{-212,8}},
+                        color={0,0,127}));
   connect(const3.y,add. u2) annotation (Line(points={{-231.6,-4},{-212,-4}},
                                  color={0,0,127}));
   connect(add.y, PV012.u_s)
