@@ -65,8 +65,8 @@ parameter SI.Temperature T_hot_design = 300;
         FV_opening; 14740,1; 15740,1], startTime=0)
     annotation (Placement(transformation(extent={{-448,110},{-434,124}})));
   Modelica.Blocks.Sources.CombiTimeTable PV049_PV052(table=[0,0; 2220,0; 2400,1;
-        9180,1; 9280,0; 10980,0; 11080,0; 14640,0; 14740,0; 15740,0], startTime
-      =0) annotation (Placement(transformation(extent={{-436,-40},{-422,-26}})));
+        9180,1; 9280,0; 10980,0; 11080,0; 14640,0; 14740,0; 15740,0], startTime=
+       0) annotation (Placement(transformation(extent={{-436,-40},{-422,-26}})));
   Modelica.Blocks.Continuous.FirstOrder firstOrder5(
     T=5,
     initType=Modelica.Blocks.Types.Init.NoInit,
@@ -101,7 +101,13 @@ parameter SI.Temperature T_hot_design = 300;
     annotation (Placement(transformation(
         extent={{-4,-4},{4,4}},
         rotation=0,
-        origin={-12,308})));
+        origin={-80,308})));
+  Modelica.Blocks.Math.Gain Gain(k=1)
+    annotation (Placement(transformation(extent={{-410,110},{-396,124}})));
+  Modelica.Blocks.Math.Gain Gain1(k=1)
+    annotation (Placement(transformation(extent={{-266,-60},{-252,-46}})));
+  Modelica.Blocks.Math.Gain Gain2(k=1)
+    annotation (Placement(transformation(extent={{-394,-36},{-380,-22}})));
 equation
 
   connect(ActuatorSubBus.PV008, PV008.y) annotation (Line(
@@ -187,35 +193,8 @@ equation
       index=-1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(ActuatorSubBus.PV006, PV006.y) annotation (Line(
-      points={{40,-99},{40,117},{-433.3,117}},
-      color={239,82,82},
-      pattern=LinePattern.Dash,
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
-  connect(ActuatorSubBus.PV049, PV049_PV052.y[1]) annotation (Line(
-      points={{40,-99},{40,-33},{-421.3,-33}},
-      color={239,82,82},
-      pattern=LinePattern.Dash,
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
   connect(PV050_PV051.y[1], firstOrder5.u) annotation (Line(points={{-421.3,-53},
           {-421.3,-54},{-320,-54},{-320,-72},{-313.2,-72}}, color={0,0,127}));
-  connect(ActuatorSubBus.PV050, PV050_PV051.y) annotation (Line(
-      points={{40,-99},{40,-53},{-421.3,-53}},
-      color={239,82,82},
-      pattern=LinePattern.Dash,
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
   connect(ActuatorSubBus.PV051, firstOrder5.y) annotation (Line(
       points={{40,-99},{40,-70},{-299.4,-70},{-299.4,-72}},
       color={239,82,82},
@@ -254,7 +233,7 @@ equation
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(ActuatorSubBus.M_dot_glycol, const2.y) annotation (Line(
-      points={{40,-99},{40,308},{-7.6,308}},
+      points={{40,-99},{40,308},{-75.6,308}},
       color={239,82,82},
       pattern=LinePattern.Dash,
       thickness=0.5), Text(
@@ -262,6 +241,39 @@ equation
       index=-1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
+  connect(PV006.y[1], Gain.u) annotation (Line(points={{-433.3,117},{-433.3,118},
+          {-411.4,118},{-411.4,117}}, color={0,0,127}));
+  connect(ActuatorSubBus.PV006[1], Gain.y) annotation (Line(
+      points={{40,-99},{40,117},{-395.3,117}},
+      color={239,82,82},
+      pattern=LinePattern.Dash,
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(PV049_PV052.y[1], Gain2.u) annotation (Line(points={{-421.3,-33},{
+          -410,-33},{-410,-29},{-395.4,-29}}, color={0,0,127}));
+  connect(ActuatorSubBus.PV049, Gain2.y) annotation (Line(
+      points={{40,-99},{40,-29},{-379.3,-29}},
+      color={239,82,82},
+      pattern=LinePattern.Dash,
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(ActuatorSubBus.PV050[1], Gain1.y) annotation (Line(
+      points={{40,-99},{40,-53},{-251.3,-53}},
+      color={239,82,82},
+      pattern=LinePattern.Dash,
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(PV050_PV051.y[1], Gain1.u)
+    annotation (Line(points={{-421.3,-53},{-267.4,-53}}, color={0,0,127}));
  annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-180,-100},
             {120,140}})), Diagram(coordinateSystem(preserveAspectRatio=false,
           extent={{-180,-100},{120,140}})));
